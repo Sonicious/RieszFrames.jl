@@ -1,0 +1,4 @@
+name = "RieszFrames"
+uuid = "34cbb2a1-e338-49e3-b529-a233ba40633f"
+authors = ["Martin Reinhardt <martin.reinhardt.3@uni-leipzig.de>"]
+version = "0.1.0"
