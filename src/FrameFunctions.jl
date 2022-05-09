@@ -1,0 +1,58 @@
+"""
+  held(x,[,m])
+
+generates the Held-Wavelet with the smoothness m
+
+The Wavelet is constructed according to the paper "Steerable Wavelet Frames Based on the Riesz Transform" by Held, Storath,Massopust and Forster
+"""
+function held(x, m=4)
+  return cos(2 * pi * q(x, m)) * ((1/8 < x <= 1/4)) + sin(2 * pi * q(1/2 * x, m)) * ( (1/4 < x <= 1/2) )
+end
+
+"""
+  papadakis(x)
+
+generates the Papadakis Wavelet Frame
+"""
+function papadakis(x)
+  return sqrt((1 + sin(2 * pi * 5 * x)) / 2) * (3 / 20 < x <= 1 / 4) + (1 / 4 < x <= 3 / 10) + sqrt((1 - sin(pi * 5 * x)) / 2) * (3 / 10 < x <= 1 / 2)
+end
+
+"""
+  shannon(x)
+
+generates theShannon Wavelet Frame
+"""
+function shannon(x)
+  return (1 / 4 < x <= 1 / 2)
+end
+
+"""
+  simoncelli(x)
+
+generates the Simoncelli Wavelet Frame
+"""
+function simoncelli(x)
+  return (1 / 8 < x <= 1 / 2) ? cos(pi / 2 * log2(4 * x)) : zero(x)
+end
+
+# Support functions for held wavelet
+
+function q(x, m)
+  # polynomial for the wavelet
+  # gives values of the supporting function q in dependency of m
+  if m == 0
+    return 1 / 8 * 4 - 1 / 8 * (4 * 4) * x
+  elseif m == 1
+    return -1 / 4 * 4 + 3 / 2 * (4 * 4) * x - 9 / 4 * (4 * 4 * 4) * (x * x) + 1 * (4 * 4 * 4 * 4) * (x * x * x)
+  elseif m == 2
+    return 2 * 4 - 15 * 4^2 * x + 45 * 4^3 * x .^ 2 - 65 * 4^4 * x .^ 3 + 45 * 4^5 * x .^ 4 - 12 * 4^6 * x .^ 5
+  elseif m == 3
+    return return -13 * 4 + 140 * 4^2 * x - 630 * 4^3 * x .^ 2 + 1540 * 4^4 * x .^ 3 - 2205 * 4^5 * x .^ 4 + 1848 * 4^6 * x .^ 5 - 840 * 4^7 * x .^ 6 + 160 * 4^8 * x .^ 7
+  elseif m == 4
+    return 92 * 4 - 1260 * 4^2 * x + 7560 * 4^3 * x .^ 2 - 26040 * 4^4 * x .^ 3 + 56700 * 4^5 * x .^ 4 - 80892 * 4^6 * x .^ 5 + 75600 * 4^7 * x .^ 6 - 44640 * 4^8 * x .^ 7 + 15120 * 4^9 * x .^ 8 - 2240 * 4^10 * x .^ 9
+  else
+    throw(DomainError(m,"the smoothness factor m must be 0 <= m <= 4"))
+  end
+end
+
