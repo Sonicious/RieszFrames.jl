@@ -4,6 +4,6 @@ include("FrameFunctions.jl")
 export held, papadakis, shannon, simoncelli
 
 include("FilterGeneration.jl")
-export GenerateRadius2D, GenerateRadius1D, GenerateRieszFilters2D
+export generateRadius2D, generateRadius1D, generateRieszFilters2D, generateFrameFilters2D
 
 end #module
