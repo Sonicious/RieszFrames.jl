@@ -2,3 +2,6 @@ name = "RieszFrames"
 uuid = "34cbb2a1-e338-49e3-b529-a233ba40633f"
 authors = ["Martin Reinhardt <martin.reinhardt.3@uni-leipzig.de>"]
 version = "0.1.0"
+
+[deps]
+FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
