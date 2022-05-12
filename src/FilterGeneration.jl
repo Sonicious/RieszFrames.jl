@@ -46,6 +46,7 @@ Generate the Riesz filterbank for the according filtersize and depth of Riesz
 """
 function GenerateRieszFilters2D(filtersize, maxrieszorder=1, type=Float64)
     # fast track for the simple case. This happens for ordinary Riesz Applications
+    
     if maxrieszorder == 1
         filterbank = Array{Array{Complex{type}}}(undef, 2)
         radius, mesh_x, mesh_y, center_x, center_y = GenerateRadius2D(filtersize, type)
@@ -55,6 +56,9 @@ function GenerateRieszFilters2D(filtersize, maxrieszorder=1, type=Float64)
         filterbank[2][center_x, center_y] = zero(type)
         return filterbank
     end
+    
+    # This part is for higher order Riesz transforms only. Not useful in case of ordinary image processing
+
     # calculate the size of the filter pyramid
     # it is guaranteed that this will be an Int
     rieszfilteramount = Int(0.5 * (maxrieszorder + 1) * (maxrieszorder + 2) - 1)
