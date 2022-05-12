@@ -1,5 +1,7 @@
 module RieszFrames
 
+using FFTW
+
 include("FrameFunctions.jl")
 export Held, Papadakis, Shannon, Simoncelli
 
