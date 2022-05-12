@@ -1,43 +1,16 @@
 """
-held(x,[,m])
+Held(x,[,m])
 
 generates the Held-Wavelet with the smoothness m
 
-The Wavelet is constructed according to the paper "Steerable Wavelet Frames Based on the Riesz Transform" by Held, Storath,Massopust and Forster
+The Wavelet is constructed according to the paper
+S. Held, M. Storath, P. Massopust and B. Forster, "Steerable Wavelet Frames Based on the Riesz Transform," in IEEE Transactions on Image Processing, vol. 19, no. 3, pp. 653-667, March 2010, doi: 10.1109/TIP.2009.2036713.
+https://ieeexplore.ieee.org/document/5339191
 """
-function held(x, m=4)
+function Held(x, m=4)
     return cos(2 * pi * q(x, m)) * ((1 / 8 < x <= 1 / 4)) + sin(2 * pi * q(1 / 2 * x, m)) * ((1 / 4 < x <= 1 / 2))
 end
-
-"""
-papadakis(x)
-
-generates the Papadakis Wavelet Frame
-"""
-function papadakis(x)
-    return sqrt((1 + sin(2 * pi * 5 * x)) / 2) * (3 / 20 < x <= 1 / 4) + (1 / 4 < x <= 3 / 10) + sqrt((1 - sin(pi * 5 * x)) / 2) * (3 / 10 < x <= 1 / 2)
-end
-
-"""
-shannon(x)
-
-generates theShannon Wavelet Frame
-"""
-function shannon(x)
-    return (1 / 4 < x <= 1 / 2)
-end
-
-"""
-simoncelli(x)
-
-generates the Simoncelli Wavelet Frame
-"""
-function simoncelli(x)
-    return (1 / 8 < x <= 1 / 2) ? cos(pi / 2 * log2(4 * x)) : zero(x)
-end
-
-# Support functions for held wavelet
-
+# Support function for held wavelet
 function q(x, m)
     # polynomial for the wavelet
     # gives values of the supporting function q in dependency of m
@@ -56,3 +29,29 @@ function q(x, m)
     end
 end
 
+"""
+Papadakis(x)
+
+generates the Papadakis Wavelet Frame
+"""
+function Papadakis(x)
+    return sqrt((1 + sin(2 * pi * 5 * x)) / 2) * (3 / 20 < x <= 1 / 4) + (1 / 4 < x <= 3 / 10) + sqrt((1 - sin(pi * 5 * x)) / 2) * (3 / 10 < x <= 1 / 2)
+end
+
+"""
+Shannon(x)
+
+generates theShannon Wavelet Frame
+"""
+function Shannon(x)
+    return (1 / 4 < x <= 1 / 2)
+end
+
+"""
+Simoncelli(x)
+
+generates the Simoncelli Wavelet Frame
+"""
+function Simoncelli(x)
+    return (1 / 8 < x <= 1 / 2) ? cos(pi / 2 * log2(4 * x)) : zero(x)
+end

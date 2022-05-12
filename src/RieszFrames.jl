@@ -1,9 +1,9 @@
 module RieszFrames
 
 include("FrameFunctions.jl")
-export held, papadakis, shannon, simoncelli
+export Held, Papadakis, Shannon, Simoncelli
 
 include("FilterGeneration.jl")
-export generateRadius2D, generateRadius1D, generateRieszFilters2D, generateFrameFilters2D
+export GenerateRadius2D, GenerateRadius1D, GenerateRieszFilters2D, GenerateFrameFilters2D
 
 end #module
