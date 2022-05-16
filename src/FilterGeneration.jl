@@ -1,7 +1,12 @@
 """
-GenerateRieszFilters
+    GenerateRieszFilters(filtersize[, maxscale, framefunction, type])
 
 Generate the Frame filterbank for the according filtersize and choosen Motherwavelet
+
+# Arguments
+- `maxscale`: blabla
+- `framefunction`: bla
+- `type`: some info about type
 """
 function GenerateFrameFilters2D(filtersize, maxscale=8, framefunction=Held, type=Float64)
     # Here, just normal dyadic dilations are considered and no higher forms. Also, the Filters in the final vector are stored from lowest to highest scale
@@ -40,13 +45,13 @@ function GenerateFrameFilters2D(filtersize, maxscale=8, framefunction=Held, type
 end
 
 """
-GenerateRieszFilters
+GenerateRieszFilters2D(filtersize[, maxrieszorder, type])
 
 Generate the Riesz filterbank for the according filtersize and depth of Riesz
 """
 function GenerateRieszFilters2D(filtersize, maxrieszorder=1, type=Float64)
     # fast track for the simple case. This happens for ordinary Riesz Applications
-    
+
     if maxrieszorder == 1
         filterbank = Array{Array{Complex{type}}}(undef, 2)
         radius, mesh_x, mesh_y, center_x, center_y = GenerateRadius2D(filtersize, type)
@@ -56,7 +61,7 @@ function GenerateRieszFilters2D(filtersize, maxrieszorder=1, type=Float64)
         filterbank[2][center_x, center_y] = zero(type)
         return filterbank
     end
-    
+
     # This part is for higher order Riesz transforms only. Not useful in case of ordinary image processing
 
     # calculate the size of the filter pyramid
@@ -87,11 +92,10 @@ function GenerateRieszFilters2D(filtersize, maxrieszorder=1, type=Float64)
 end
 
 """
-GenerateRadius2D(filtersize)
+GenerateRadius2D(filtersize[, type])
 
 Generates the Radius for a given 2D filtersize
 """
-
 function GenerateRadius2D(filtersize, type=Float64)
     # malloc
     radius_x = GenerateRadius1D(filtersize[1], type)
@@ -105,7 +109,7 @@ function GenerateRadius2D(filtersize, type=Float64)
 end #GenerateRadius2D
 
 """
-GenerateRadius1D(filtersize)
+GenerateRadius1D(filtersize[, type])
 
 Generates the Radius for a given 1D filtersize
 """
