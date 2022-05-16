@@ -1,12 +1,16 @@
 """
-    GenerateRieszFilters(filtersize[, maxscale, framefunction, type])
+    GenerateFrameFilters2D(filtersize[, maxscale, framefunction, type])
 
 Generate the Frame filterbank for the according filtersize and choosen Motherwavelet
-
 # Arguments
-- `maxscale`: blabla
-- `framefunction`: bla
-- `type`: some info about type
+- `maxscale`: The amount of downsampling steps the filter is generated for (default: 8).
+- `framefunction`: This is the function of the motherwavelet (default: Held).
+- `type`: The type specifies the floating point type of the filterbanks (default: Float64).
+# Example
+```jldoctest
+julia> filterbank = GenerateFrameFilters2D((64, 64))
+julia> filterbank = GenerateFrameFilters2D((32, 32), 3, Held, Float32)
+```
 """
 function GenerateFrameFilters2D(filtersize, maxscale=8, framefunction=Held, type=Float64)
     # Here, just normal dyadic dilations are considered and no higher forms. Also, the Filters in the final vector are stored from lowest to highest scale
@@ -45,9 +49,16 @@ function GenerateFrameFilters2D(filtersize, maxscale=8, framefunction=Held, type
 end
 
 """
-GenerateRieszFilters2D(filtersize[, maxrieszorder, type])
+    GenerateRieszFilters2D(filtersize[, maxrieszorder, type])
 
 Generate the Riesz filterbank for the according filtersize and depth of Riesz
+
+Higher order Riesz transforms can be achieved by raising the umber of `maxrieszorder`. The according filterbank is of a pyramid scheme. The `filtersize` is a tuple
+# Example
+```jldoctest
+julia> filterbank = GenerateFrameFilters2D((128, 64))
+julia> filterbank = GenerateFrameFilters2D((32, 32), 3, Papadakis, Float64)
+```
 """
 function GenerateRieszFilters2D(filtersize, maxrieszorder=1, type=Float64)
     # fast track for the simple case. This happens for ordinary Riesz Applications
@@ -92,7 +103,7 @@ function GenerateRieszFilters2D(filtersize, maxrieszorder=1, type=Float64)
 end
 
 """
-GenerateRadius2D(filtersize[, type])
+    GenerateRadius2D(filtersize[, type])
 
 Generates the Radius for a given 2D filtersize
 """
@@ -109,7 +120,7 @@ function GenerateRadius2D(filtersize, type=Float64)
 end #GenerateRadius2D
 
 """
-GenerateRadius1D(filtersize[, type])
+    GenerateRadius1D(filtersize[, type])
 
 Generates the Radius for a given 1D filtersize
 """

@@ -17,5 +17,6 @@ makedocs(
 )
 
 deploydocs(
+    devbranch="main",
     repo="git@github.com:Sonicious/RieszFrames.jl.git"
 )
