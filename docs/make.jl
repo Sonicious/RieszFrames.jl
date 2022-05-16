@@ -5,10 +5,10 @@ using Documenter
 using RieszFrames
 
 makedocs(
-    sitename = "RieszFrames",
-    format = Documenter.HTML(),
-    modules = [RieszFrames],
-    pages = [
+    sitename="RieszFrames",
+    format=Documenter.HTML(),
+    modules=[RieszFrames],
+    pages=[
         "Introduction" => "index.md",
         "Algorithms" => "algorithms.md",
         "Utility Functions" => "utilities.md",
@@ -17,5 +17,5 @@ makedocs(
 )
 
 deploydocs(
-    repo = "https://github.com/Sonicious/RieszFrames.jl"
+    repo="git@github.com:Sonicious/RieszFrames.jl.git"
 )
